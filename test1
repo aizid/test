@@ -20,7 +20,7 @@
 
 					<?php
 						$cat = get_the_category();
-						$slider_thumbs = get_posts($cat->slug);
+						$slider_thumbs = get_pages($cat->slug);
 						
 						if ($slider_thumbs){
 						foreach( $slider_thumbs as $slider_thumb ) {
