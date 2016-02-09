@@ -1,0 +1,64 @@
+<div id="aizid-carousel" class="carousel slide" data-ride="carousel"> 
+
+						  <!-- Wrapper for slides -->
+						  <div class="carousel-inner" role="listbox">
+						  		<?php
+						  			$args = array(
+						  				'type' => 'post',
+						  				'posts_per_page' => 3,
+						  				'tag' => 'top-on-going',
+						  			);
+							  	 	
+							  	 	$lastPost = new WP_Query($args);
+
+									if ( $lastPost->have_posts() ):
+										$count = 0;
+										$bullets = '';
+									while ( $lastPost->have_posts() ) : $lastPost->the_post(); ?>
+
+										<div class="item <?php if($count == 0): echo 'active'; endif; ?>">
+
+										    <?php
+										     	$cat = get_the_category();
+												$categname = $cat->cat_name;
+												$slider_thumbs = get_pages($categname);
+												
+												  foreach( $slider_thumbs as $slider_thumb ) {
+												  echo  get_the_post_thumbnail($slider_thumb) ;
+												  }												  
+											?>
+				
+									      <div class="carousel-caption">
+									      	<?php the_title(sprintf('<h3 class="entry-title"><a href="%s">',esc_url(get_permalink() )),'</a></h3>' ); ?>
+									      	<h5><?php the_category(' '); ?> </h5>
+									      </div>
+									    </div>
+
+									<?php $bullets .= '<li data-target="#aizid-carousel" data-slide-to="'.$count.'" class="';?>
+									<?php if($bullets == 0): $bullets .='active'; endif; ?>
+									<?php $bullets .= '"></li>'; ?>
+										
+									<?php $count++; endwhile;
+										
+									endif; 
+
+									wp_reset_postdata(); 
+								?>
+
+								<!-- Indicators -->
+								  <ol class="carousel-indicators">
+								  	<?php echo $bullets; ?>
+								  </ol>
+						  
+						  </div>
+
+						  <!-- Controls -->
+						  <a class="left carousel-control" href="#aizid-carousel" role="button" data-slide="prev">
+						    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						    <span class="sr-only">Previous</span>
+						  </a>
+						  <a class="right carousel-control" href="#aizid-carousel" role="button" data-slide="next">
+						    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						    <span class="sr-only">Next</span>
+						  </a>
+						</div>
