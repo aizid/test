@@ -20,12 +20,12 @@
 
 					<?php
 						$cat = get_the_category();
-						$categname = $cat->cat_name;
-						$slider_thumbs = get_pages($categname);
-												
+						$slider_thumbs = get_posts($cat->slug);
+						
+						if ($slider_thumbs){
 						foreach( $slider_thumbs as $slider_thumb ) {
-						echo  get_the_post_thumbnail($slider_thumb) ;
-						}												  
+						echo  get_the_post_thumbnail($slider_thumb->ID, 'full') ;
+						}	}										  
 					?>
 				
 					<div class="carousel-caption">
