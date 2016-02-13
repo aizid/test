@@ -19,7 +19,7 @@
 				<div class="item <?php if($count == 0): echo 'active'; endif; ?>">
 				
 				// ===========================================
-				 ::this the problem::
+				 :: this the problem ::
 				// ===========================================
 					<?php
 						$cat = get_the_category();
