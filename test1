@@ -17,16 +17,20 @@
 			while ( $lastPost->have_posts() ) : $lastPost->the_post(); ?>
 
 				<div class="item <?php if($count == 0): echo 'active'; endif; ?>">
-
+				
+				// ===========================================
+				 ::this the problem::
+				// ===========================================
 					<?php
 						$cat = get_the_category();
-						$slider_thumbs = get_pages($cat->slug);
-						
-						if ($slider_thumbs){
+						$categname = $cat->cat_name;
+						$slider_thumbs = get_pages($categname);
+												
 						foreach( $slider_thumbs as $slider_thumb ) {
-						echo  get_the_post_thumbnail($slider_thumb->ID, 'full') ;
-						}	}										  
+						echo  get_the_post_thumbnail($slider_thumb) ;
+						}
 					?>
+				// ===========================================
 				
 					<div class="carousel-caption">
 						<?php the_title(sprintf('<h3 class="entry-title"><a href="%s">',esc_url(get_permalink() )),'</a></h3>' ); ?>
