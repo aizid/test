@@ -23,12 +23,18 @@
 				// ===========================================
 					<?php
 						$cat = get_the_category();
-						$categname = $cat->cat_name;
-						$slider_thumbs = get_pages($categname);
-												
-						foreach( $slider_thumbs as $slider_thumb ) {
-						echo  get_the_post_thumbnail($slider_thumb) ;
-						}
+						// $categname = $cat->cat_name;
+						// $slider_thumbs = get_pages($categname); // ini yakin pakek get_pages, get_pages itu buat manggil post yang post_type nya pages
+	
+						$slider_thumbs = new WP_Query(array('category_name' => $cat->cat_name ));
+						
+						if( $slider_thumbs->have_posts() ) while( $slider_thumbs->have_posts() ): $slider_thumbs->the_post();
+						
+							echo  get_the_post_thumbnail() ;
+						
+						endwhile;
+						wp_reset_query();
+						
 					?>
 				// ===========================================
 				
